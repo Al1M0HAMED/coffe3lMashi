@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Full Screen Image with Dynamic Background Color</title>
+    <script src="color-thief.js"></script>
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow: hidden;
+        }
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #d2b48c; /* Default gray background color */
+        }
+        img {
+            max-width: 100%;
+            max-height: 100%;
+        }
+    </style>
+</head>
+<body>
+    <img id="fullScreenImage" src="Beige Restaurant Menu (2).png" alt="Description of your image">
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            var img = document.getElementById("fullScreenImage");
+            var colorThief = new ColorThief();
+            var dominantColor = colorThief.getColor(img);
+
+            // Convert RGB to hexadecimal color representation
+            var hexColor = rgbToHex(dominantColor[0], dominantColor[1], dominantColor[2]);
+
+            // Apply the dominant color to the background
+            document.body.style.backgroundColor = hexColor;
+
+            // Function to convert RGB to hexadecimal color
+            function rgbToHex(r, g, b) {
+                return "#" + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1);
+            }
+        });
+    </script>
+</body>
+</html>
